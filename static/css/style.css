@@ -1,0 +1,316 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #05d182 0%, #ffd700 100%);
+  --primary-color: #05d182;
+  --secondary-color: #ffd700;
+  --washer-gradient: linear-gradient(145deg, #e6e6e6, #ffffff);
+  --dryer-gradient: linear-gradient(145deg, #fff5e6, #ffebcd);
+  --drum-gradient: linear-gradient(145deg, #333, #555);
+  --dryer-drum-gradient: linear-gradient(145deg, #8b4513, #a0522d);
+}
+
+body {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+.main-header {
+  text-align: center;
+  margin: 2rem 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 통계 카드 스타일 */
+.stats-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.stats-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.stats-card.available:hover {
+  border-color: #28a745;
+}
+
+.stats-card.running:hover {
+  border-color: #007bff;
+}
+
+.stats-card.maintenance:hover {
+  border-color: #ffc107;
+}
+
+.stats-card.next-available:hover {
+  border-color: #17a2b8;
+}
+
+.stats-card h4 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.stats-card small {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 기본 카드 */
+.washer-dryer-set {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.washer-dryer-set:hover {
+  transform: translateY(-5px);
+}
+
+/* 세트 헤더 */
+.set-header {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* 성별 선택 라디오 버튼 */
+.gender-selector {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.gender-btn {
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.gender-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 남자 세탁실 그리드 레이아웃 */
+.male-set {
+  margin-bottom: 2rem;
+}
+
+/* 데스크톱(XL 이상): 5개씩 */
+@media (min-width: 1200px) {
+  .col-xl-2-4 {
+    flex: 0 0 auto;
+    width: 20%; /* 100% / 5 = 20% */
+  }
+}
+
+/* 태블릿(LG): 3개씩 */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .male-set {
+    flex: 0 0 auto;
+    width: 33.333333%; /* 100% / 3 = 33.33% */
+  }
+}
+
+/* 모바일(MD 이하): 2개씩 */
+@media (max-width: 991px) {
+  .male-set {
+    margin-bottom: 2rem;
+    flex: 0 0 auto;
+    width: 50%; /* 100% / 2 = 50% */
+  }
+}
+
+/* 여자 세탁실 그리드 레이아웃 - 항상 2개씩 */
+.female-set {
+  margin-bottom: 2rem;
+  flex: 0 0 auto;
+  width: 50%; /* 항상 2개씩 */
+}
+
+/* 성별 섹션 헤더 스타일 */
+.section-header {
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.male-section {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.female-section {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+/* 성별 배지 스타일 */
+.gender-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* 반응형 디자인 개선 */
+@media (max-width: 768px) {
+  .section-header {
+    padding: 1rem 1.5rem;
+  }
+
+  .section-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .gender-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .set-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .set-header .d-flex {
+    width: 100%;
+  }
+
+  .gender-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    min-width: 140px;
+  }
+
+  /* 모바일에서 남자 세탁실도 1개씩 */
+  .male-set {
+    width: 100%;
+  }
+
+  .female-set {
+    width: 100%;
+  }
+}
+
+/* 아주 작은 화면 */
+@media (max-width: 576px) {
+  .gender-selector .btn-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .gender-btn {
+    margin-bottom: 0.5rem;
+    border-radius: 25px !important;
+  }
+}
+
+/* 컴팩트 통계 스타일 */
+.compact-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.compact-stats:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.compact-stat {
+  text-align: center;
+  flex: 1;
+}
+
+.compact-stat h5 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #2c3e50;
+}
+
+.compact-stat small {
+  font-size: 0.75rem;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .compact-stats {
+    padding: 1rem;
+  }
+
+  .compact-stat h5 {
+    font-size: 1.2rem;
+  }
+
+  .compact-stat small {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .compact-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .compact-stats > .text-center {
+    margin-right: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .compact-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 8px;
+  }
+
+  .compact-stat h5 {
+    margin-bottom: 0;
+  }
+}

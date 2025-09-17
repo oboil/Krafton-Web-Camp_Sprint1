@@ -1,0 +1,521 @@
+/* 기기 컨테이너 (세로 배치) */
+.machines-column {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+/* 개별 기기 */
+.machine {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 1rem;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: fit-content;
+}
+
+.machine:hover {
+  border-color: #667eea;
+  background: #f0f2ff;
+}
+
+/* .machine.running {
+  border-color: #28a745;
+  background: linear-gradient(135deg, #f0fff4, #e8f5e8);
+}
+e .machine.available {
+  border-color: #000000;
+  background: linear-gradient(135deg, #f0fdff, #e8f9fc);
+}
+
+.machine.maintenance {
+  border-color: #ffc107;
+  background: linear-gradient(135deg, #fffcf0, #fef8e8);
+} */
+
+/* 기기 본체 */
+.machine-body {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  position: relative;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  border: 3px solid #ddd;
+}
+
+.machine-body.washer {
+  background: var(--washer-gradient);
+}
+
+.machine-body.dryer {
+  background: var(--dryer-gradient);
+  border-color: #deb887;
+}
+
+/* 기기 시각적 표현 */
+.machine-visual {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  position: relative;
+  margin-bottom: 1rem; /* 아래 여백 추가 */
+  flex-shrink: 0;
+}
+
+.washer-visual {
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  border: 3px solid #ddd;
+}
+
+.dryer-visual {
+  background: linear-gradient(145deg, #fff5e6, #ffebcd);
+  border: 3px solid #deb887;
+}
+
+/* 컨트롤 패널 */
+.control-panel {
+  height: 25px;
+  background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.control-btn {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #dc3545, #c82333);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin: 0 2px;
+}
+
+.control-btn.power {
+  background: linear-gradient(145deg, #28a745, #20c997);
+}
+
+.control-btn.power.running {
+  animation: pulse 2s infinite;
+}
+
+/* 디스플레이 */
+.display {
+  background: #000;
+  color: #00ff41;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+  font-size: 8px;
+  text-align: center;
+  margin: 0 4px;
+}
+
+.display.running {
+  background: #28a745;
+  color: white;
+}
+
+.display.maintenance {
+  background: #ffc107;
+  color: #000;
+}
+
+/* 드럼 컨테이너 */
+.drum-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 8px auto;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #222;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.drum-container.washer {
+  background: var(--drum-gradient);
+}
+
+.drum-container.dryer {
+  background: var(--dryer-drum-gradient);
+  border-color: #654321;
+}
+
+/* 드럼 */
+.drum {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.drum.washer {
+  background: linear-gradient(45deg, #444, #666);
+}
+
+.drum.dryer {
+  background: linear-gradient(45deg, #8b4513, #a0522d);
+}
+
+.drum.spinning {
+  animation: drumSpin 2s linear infinite;
+}
+
+/* 드럼 구멍 */
+.drum-holes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #111;
+  border-radius: 50%;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+/* 물 효과 (세탁기용) */
+.water {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(
+    180deg,
+    rgba(100, 200, 255, 0.4) 0%,
+    rgba(50, 150, 255, 0.7) 100%
+  );
+  border-radius: 0 0 50% 50%;
+}
+
+.water.active {
+  animation: waterWave 1.5s ease-in-out infinite;
+}
+
+/* 열기 효과 (건조기용) */
+.heat {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 165, 0, 0.4) 0%,
+    rgba(255, 69, 0, 0.2) 100%
+  );
+  border-radius: 50%;
+}
+
+.heat.active {
+  animation: heatPulse 2s ease-in-out infinite;
+}
+
+/* 세탁물 */
+.clothes {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.clothes:nth-child(1) {
+  background: #ff6b6b;
+  top: 25%;
+  left: 30%;
+  animation: clothesFloat 3s ease-in-out infinite;
+}
+
+.clothes:nth-child(2) {
+  background: #4ecdc4;
+  top: 45%;
+  right: 25%;
+  animation: clothesFloat 3s ease-in-out infinite 0.7s;
+}
+
+.clothes:nth-child(3) {
+  background: #45b7d1;
+  bottom: 25%;
+  left: 35%;
+  animation: clothesFloat 3s ease-in-out infinite 1.4s;
+}
+
+/* 기기 정보 */
+.machine-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex: 1; /* 남은 공간 차지 */
+}
+
+.machine-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.machine-status {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.machine-status.hidden {
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.machine-timer {
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #28a745;
+  text-align: center;
+}
+
+/* 상태 배지 */
+.status-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 10;
+}
+
+/* 버튼 영역 */
+.machine-controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: auto; /* 자동으로 아래로 밀어내기 */
+}
+
+.btn-custom,
+.btn-machine {
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-weight: 600;
+  min-width: 80px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  /* justify-content: center; */
+}
+
+.btn-custom:hover,
+.btn-machine:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 연결선 */
+.connection-line {
+  width: 2px;
+  height: 20px;
+  background: var(--primary-gradient);
+  margin: 0 auto;
+  border-radius: 1px;
+}
+
+/* 애니메이션 */
+@keyframes drumSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes waterWave {
+  0%,
+  100% {
+    transform: translateY(0px);
+    border-radius: 0 0 50% 50%;
+  }
+  50% {
+    transform: translateY(-4px);
+    border-radius: 0 0 60% 40%;
+  }
+}
+
+@keyframes heatPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes clothesFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.8;
+  }
+  33% {
+    transform: translate(8px, -5px) rotate(120deg);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(-5px, 3px) rotate(240deg);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .machine {
+    /* flex-direction: column; */
+    text-align: center;
+  }
+
+  .machine-body {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .machine-info {
+    padding-left: 0;
+  }
+
+  .machine-controls {
+    margin-left: 0;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* 1200px 이상에서 여자 섹션 machine 내부 요소들 가로 정렬 */
+@media (min-width: 1200px) {
+  .female-set .machine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .female-set .machine-visual {
+    flex: 0 0 auto;
+    width: 120px; /* 고정 너비 */
+    margin-bottom: 0; /* 세로 배치용 마진 제거 */
+  }
+
+  .female-set .machine-info {
+    flex: 1;
+    min-width: 0; /* flexbox overflow 방지 */
+    margin-bottom: 0; /* 세로 배치용 마진 제거 */
+    align-items: flex-start; /* 좌측 정렬로 변경 */
+  }
+
+  .female-set .machine-timer {
+    flex: 0 0 auto;
+    width: 100px; /* 고정 너비 */
+    text-align: center;
+  }
+
+  .female-set .machine-controls {
+    flex: 0 0 auto;
+    width: 120px; /* 고정 너비 */
+    display: flex;
+    flex-direction: column !important; /* !important로 우선순위 확보 */
+    justify-content: center;
+    align-items: center;
+    margin-top: 0; /* margin-top: auto 제거 */
+  }
+
+  /* 필요시 machine 내부 요소들의 세로 정렬 조정 */
+  .female-set .machine-info,
+  .female-set .machine-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* 버튼들이 세로로 쌓이지 않도록 조정 */
+  .female-set .machine-controls .btn {
+    margin-bottom: 0.25rem;
+  }
+
+  .female-set .machine-controls .btn:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 타이머 텍스트 크기 조정 (가로 배치에서 더 작게) */
+  .female-set .machine-timer {
+    font-size: 0.9rem;
+  }
+
+  /* machine-info 내부 텍스트들 간격 조정 */
+  .female-set .machine-info > * {
+    margin-bottom: 0.25rem;
+  }
+
+  .female-set .machine-info > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 남자 섹션은 기존 세로 배치 유지 */
+  .male-set .machine-controls {
+    margin-left: 0;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* 추가 옵션: 더 큰 화면(1400px+)에서 더 넓은 간격 */
+@media (min-width: 1400px) {
+  .female-set .machine {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .female-set .machine-visual {
+    width: 140px;
+  }
+
+  .female-set .machine-timer {
+    width: 120px;
+  }
+
+  .female-set .machine-controls {
+    width: 140px;
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+  }
+}
